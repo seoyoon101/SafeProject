@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "414426483240",
+    "project_id": "safeproject-e54aa",
+    "storage_bucket": "safeproject-e54aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414426483240:android:6c5cae6695c85a41f5431d",
+        "android_client_info": {
+          "package_name": "com.seoyoon.safeproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBovcGASaBZGM_g4UzAiIpm98GaXTE3Vok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
