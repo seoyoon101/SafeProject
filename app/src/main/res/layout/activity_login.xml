@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/img" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/id_input"
         android:layout_width="352dp"
         android:layout_height="50dp"
         android:background="#D1D1D1"
@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.466" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/Password_input"
         android:layout_width="352dp"
         android:layout_height="50dp"
         android:background="#D0D0D0"
@@ -52,7 +52,7 @@
         app:layout_constraintVertical_bias="0.552" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkbox_auto_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="자동 로그인"
@@ -64,7 +64,7 @@
         app:layout_constraintVertical_bias="0.636" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/checkBox_id_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="아이디 저장"
@@ -76,7 +76,7 @@
         app:layout_constraintVertical_bias="0.636" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/login_button"
         android:layout_width="356dp"
         android:layout_height="53dp"
 
