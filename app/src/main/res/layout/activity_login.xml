@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/img" />
 
     <EditText
-        android:id="@+id/id_input"
+        android:id="@+id/email_edit_text"
         android:layout_width="352dp"
         android:layout_height="50dp"
         android:background="#D1D1D1"
@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.466" />
 
     <EditText
-        android:id="@+id/Password_input"
+        android:id="@+id/password_edit_text"
         android:layout_width="352dp"
         android:layout_height="50dp"
         android:background="#D0D0D0"
@@ -79,7 +79,6 @@
         android:id="@+id/login_button"
         android:layout_width="356dp"
         android:layout_height="53dp"
-
         android:text="로그인"
         android:textSize="20sp"
         android:textStyle="bold"
