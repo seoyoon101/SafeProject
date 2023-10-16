@@ -23,7 +23,7 @@
         android:layout_height="50dp"
         android:background="#D1D1D1"
         android:ems="10"
-        android:hint="아이디 또는 이메일을 입력하세요"
+        android:hint="이메일을 입력하세요"
         android:inputType="text"
         android:paddingLeft="12dp"
         android:textSize="14sp"
