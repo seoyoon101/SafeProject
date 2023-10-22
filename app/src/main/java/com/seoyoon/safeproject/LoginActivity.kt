@@ -23,6 +23,11 @@ class LoginActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }
+
+        if (binding.checkBoxIdSave.isActivated) {
+
+        }
+
     }
     private fun initLoginButton() {
         binding.loginButton.setOnClickListener {

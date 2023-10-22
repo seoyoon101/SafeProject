@@ -16,7 +16,7 @@ class JoinActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
-        initSignupButton()
+        initnextbutton()
 
 
 //        binding.emailEditText.addTextChangedListener {
@@ -28,8 +28,8 @@ class JoinActivity : AppCompatActivity() {
 //        }
     }
 
-    private fun initSignupButton() {
-        binding.signupButton.setOnClickListener {
+    private fun initnextbutton() {
+        binding.nextButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
 

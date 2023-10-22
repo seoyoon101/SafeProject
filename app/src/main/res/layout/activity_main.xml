@@ -11,15 +11,14 @@
         android:id="@+id/map_fragment"
         android:name="com.naver.maps.map.MapFragment"
         android:layout_width="match_parent"
-        app:layout_constraintVertical_weight="8"
-        android:layout_height="500dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="10" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-
 
         <Button
             android:id="@+id/emergency_button"
