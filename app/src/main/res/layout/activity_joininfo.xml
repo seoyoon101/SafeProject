@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".joininfoActivity">
+    tools:context=".JoininfoActivity">
 
     <EditText
-        android:id="@+id/join_member_name_input2"
+        android:id="@+id/et_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.502" />
 
     <EditText
-        android:id="@+id/join_tel2"
+        android:id="@+id/join_tel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -78,7 +78,7 @@
         app:layout_constraintVertical_bias="0.35" />
 
     <EditText
-        android:id="@+id/join_birth2"
+        android:id="@+id/join_birth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -91,7 +91,7 @@
         app:layout_constraintVertical_bias="0.462" />
 
     <EditText
-        android:id="@+id/join_emergency_tel4"
+        android:id="@+id/join_emergency_tel1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -147,7 +147,7 @@
         app:layout_constraintVertical_bias="0.553" />
 
     <EditText
-        android:id="@+id/join_emergency_tel"
+        android:id="@+id/join_emergency_tel3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -175,7 +175,7 @@
         app:layout_constraintVertical_bias="0.669" />
 
     <EditText
-        android:id="@+id/join_emergency_tel5"
+        android:id="@+id/join_emergency_tel2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -215,21 +215,25 @@
         app:srcCompat="@drawable/img" />
 
     <RadioGroup
+        android:id="@+id/radio_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="289dp" >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_name">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/radio_female"
+            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="여성" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radio_male"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
