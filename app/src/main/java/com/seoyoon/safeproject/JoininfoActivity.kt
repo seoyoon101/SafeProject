@@ -18,10 +18,14 @@ class JoininfoActivity : AppCompatActivity() {
 
         val intent = Intent(this, LoginActivity::class.java)
         val email = intent.getStringExtra("email")
-        val gender: String = "여성"
+        var gender = "여성"
+        binding.radioFemale.isChecked = true
 
-        if (binding.radioGender.checkedRadioButtonId != R.id.radio_female) {
-            gender == "남성"
+        binding.radioGender.setOnCheckedChangeListener { radioGroup, id ->
+            when (id) {
+                binding.radioFemale.id -> gender = "여성"
+                binding.radioMale.id -> gender = "남성"
+            }
         }
 
         binding.signupButton2.setOnClickListener {
