@@ -17,7 +17,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".joininfoActivity"
+            android:name=".JoininfoActivity"
             android:exported="false" />
 
         <meta-data
