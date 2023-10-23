@@ -226,12 +226,12 @@
 
         <RadioButton
             android:id="@+id/radio_female"
-            android:checked="true"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="여성" />
-
+        <!--            android:checked="true"-->
         <RadioButton
             android:id="@+id/radio_male"
             android:layout_width="wrap_content"
