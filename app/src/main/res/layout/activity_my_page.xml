@@ -65,11 +65,15 @@
     <TextView
         android:id="@+id/textView4"
         android:layout_width="112dp"
-        android:layout_height="56dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="89dp"
+        android:layout_marginBottom="137dp"
         android:text="내 정보"
         android:textSize="34sp"
-        tools:layout_editor_absoluteX="149dp"
-        tools:layout_editor_absoluteY="89dp" />
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/et_name2"
@@ -204,11 +208,15 @@
         app:layout_constraintGuide_begin="-34dp" />
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="206dp"
-        android:layout_height="27dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="422dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="282dp" >
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <RadioButton
             android:id="@+id/radioButton"

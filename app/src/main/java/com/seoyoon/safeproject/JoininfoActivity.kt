@@ -16,7 +16,6 @@ class JoininfoActivity : AppCompatActivity() {
 
         val db = Firebase.firestore
 
-        val intent = Intent(this, LoginActivity::class.java)
         val email = intent.getStringExtra("email")
         var gender = "여성"
         binding.radioFemale.isChecked = true
@@ -31,6 +30,7 @@ class JoininfoActivity : AppCompatActivity() {
         binding.signupButton2.setOnClickListener {
 
             val user = hashMapOf(
+                "email" to email,
                 "name" to binding.etName.text.toString(),
                 "gender" to gender,
                 "born" to binding.joinBirth.text.toString(),
@@ -40,10 +40,12 @@ class JoininfoActivity : AppCompatActivity() {
                 "emergency3" to binding.joinEmergencyTel3.text.toString(),
             )
 
-            db.collection(email.toString())
-                .add(user)
-
-            startActivity(intent)
-            finish() }
+            db.collection("users")
+                .document(email.toString())
+                .set(user)
+            val intentToMain = Intent(this, LoginActivity::class.java)
+            startActivity(intentToMain)
+            finish()
+        }
     }
 }
