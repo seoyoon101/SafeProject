@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/map_fragment"
-        android:name="com.naver.maps.map.MapFragment"
+    <ImageView
+        android:id="@+id/User_button"
         android:layout_width="match_parent"
-        android:layout_height="73dp"
-        android:layout_weight="10" />
+        android:layout_height="52dp"
+        android:scaleType="fitEnd"
+        android:src="@drawable/user" />
+
+    <ImageView
+        android:id="@+id/Vital_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/vital" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/emergency_button"
-            android:layout_width="301dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="#FF6767"
-            android:text="긴급신고" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/map_fragment"
+            android:name="com.naver.maps.map.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>
