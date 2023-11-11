@@ -32,7 +32,7 @@ class MainActivity : FragmentActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         binding.userButton.setOnClickListener {
-            val intent = Intent(this, MypageActivity::class.java)
+            val intent = Intent(this, MyPageActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }
