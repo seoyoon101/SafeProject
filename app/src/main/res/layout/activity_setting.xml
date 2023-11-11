@@ -25,8 +25,10 @@
         android:layout_width="206dp"
         android:layout_height="27dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="282dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/join_gender"
+        tools:layout_editor_absoluteY="282dp"
+        tools:ignore="MissingConstraints">
 
         <RadioButton
             android:id="@+id/radioButton"

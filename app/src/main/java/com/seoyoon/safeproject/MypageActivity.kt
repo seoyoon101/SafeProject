@@ -4,17 +4,21 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.seoyoon.safeproject.databinding.ActivityMypageBinding
 
 class MypageActivity : AppCompatActivity() {
+    lateinit var binding: ActivityMypageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mypage)
+        binding = ActivityMypageBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        Handler().postDelayed({
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-            startActivity(intent)
-            finish()
-        }, SplashActivity.DURATION)
+
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        startActivity(intent)
+        finish()
+
+
     }
 }
