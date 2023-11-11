@@ -20,7 +20,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/User_button"
+        android:id="@+id/user_button"
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:layout_gravity="end"
@@ -28,10 +28,19 @@
         android:src="@drawable/user" />
 
     <ImageView
-        android:id="@+id/Vital_button"
+        android:id="@+id/vital"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:src="@drawable/vital" />
+
+    <ImageButton
+        android:id="@+id/setting_button"
+        android:layout_width="69dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|end"
+        android:layout_weight="1"
+        android:backgroundTint="#00FFFFFF"
+        android:src="@drawable/setting" />
 
 </FrameLayout>

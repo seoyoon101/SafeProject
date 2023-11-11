@@ -173,8 +173,10 @@
         android:layout_width="206dp"
         android:layout_height="27dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="246dp">
+        app:layout_constraintBottom_toTopOf="@+id/join_birth2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Adit_gender"
+        app:layout_constraintTop_toBottomOf="@+id/et_name2">
 
         <RadioButton
             android:id="@+id/radioButton"

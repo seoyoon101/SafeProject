@@ -1,5 +1,6 @@
 package com.seoyoon.safeproject
 
+import android.content.Intent
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -22,6 +23,18 @@ class MainActivity : FragmentActivity(), OnMapReadyCallback {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.mapFragment
+
+        binding.userButton.setOnClickListener{
+            val intent = Intent(this, MypageActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+        }
+
+        binding.settingButton.setOnClickListener{
+            val intent = Intent(this, settingActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+        }
     }
 
     override fun onMapReady(naverMap: NaverMap) {
