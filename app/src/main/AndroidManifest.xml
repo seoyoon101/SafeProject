@@ -20,7 +20,7 @@
             android:name=".settingActivity"
             android:exported="false" />
         <activity
-            android:name=".MypageActivity"
+            android:name=".MyPageActivity"
             android:exported="false" />
         <activity
             android:name=".JoininfoActivity"
