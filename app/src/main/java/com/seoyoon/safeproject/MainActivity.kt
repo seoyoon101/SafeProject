@@ -38,7 +38,7 @@ class MainActivity : FragmentActivity(), OnMapReadyCallback {
         }
 
         binding.settingButton.setOnClickListener {
-            val intent = Intent(this, settingActivity::class.java)
+            val intent = Intent(this, SettingActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }

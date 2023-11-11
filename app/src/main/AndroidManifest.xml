@@ -17,7 +17,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".settingActivity"
+            android:name=".SettingActivity"
             android:exported="false" />
         <activity
             android:name=".MyPageActivity"
