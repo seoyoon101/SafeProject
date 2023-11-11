@@ -2,15 +2,16 @@ package com.seoyoon.safeproject
 
 import android.content.Intent
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraPosition
+import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.NaverMapOptions
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.util.MarkerIcons
 import com.seoyoon.safeproject.databinding.ActivityMainBinding
 
 class MainActivity : FragmentActivity(), OnMapReadyCallback {
@@ -22,15 +23,21 @@ class MainActivity : FragmentActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.mapFragment
 
-        binding.userButton.setOnClickListener{
+        val fm = supportFragmentManager
+        val mapFragment = fm.findFragmentById(R.id.map_fragment) as MapFragment?
+            ?: MapFragment.newInstance().also {
+                fm.beginTransaction().add(R.id.map_fragment, it).commit()
+            }
+        mapFragment.getMapAsync(this)
+
+        binding.userButton.setOnClickListener {
             val intent = Intent(this, MypageActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }
 
-        binding.settingButton.setOnClickListener{
+        binding.settingButton.setOnClickListener {
             val intent = Intent(this, settingActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
@@ -39,11 +46,12 @@ class MainActivity : FragmentActivity(), OnMapReadyCallback {
 
     override fun onMapReady(naverMap: NaverMap) {
         val options = NaverMapOptions()
-            .camera(CameraPosition(LatLng(35.1798159, 129.0750222), 8.0))
+            .camera(CameraPosition(LatLng(37.5670135, 126.9783740), 8.0))
             .mapType(NaverMap.MapType.Terrain)
 
         val marker = Marker()
-        marker.position = LatLng(35.1798159, 129.0750222)
+        marker.position = LatLng(37.5670135, 126.9783740)
+        marker.icon = MarkerIcons.RED
         marker.map = naverMap
 
         val myMarker = Marker()
