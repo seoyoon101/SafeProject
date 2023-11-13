@@ -1,11 +1,11 @@
 package com.seoyoon.safeproject
 
 import android.content.Intent
+import android.graphics.Paint.Join
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.seoyoon.safeproject.databinding.ActivityJoininfoBinding
+import com.seoyoon.safeproject.databinding.ActivityLoginBinding
 
 class JoininfoActivity : AppCompatActivity() {
     lateinit var binding: ActivityJoininfoBinding
@@ -26,8 +26,7 @@ class JoininfoActivity : AppCompatActivity() {
                 binding.radioMale.id -> gender = "남성"
             }
         }
-
-        binding.signupButton2.setOnClickListener {
+        }
 
             val user = hashMapOf(
                 "email" to email,
@@ -47,5 +46,6 @@ class JoininfoActivity : AppCompatActivity() {
             startActivity(intentToMain)
             finish()
         }
+
     }
 }
