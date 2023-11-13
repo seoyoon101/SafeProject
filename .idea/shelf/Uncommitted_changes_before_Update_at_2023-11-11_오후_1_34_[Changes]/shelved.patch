@@ -1,0 +1,32 @@
+Index: app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.seoyoon.safeproject\r\n\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport android.os.Bundle\r\n\r\nclass MyPageActivity : AppCompatActivity() {\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_my_page)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt b/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt
+--- a/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt	(revision 761bd56fb9265b1bd7f5c18f4c58b99b967c45ad)
++++ b/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt	(date 1699674289563)
+@@ -1,11 +1,18 @@
+ package com.seoyoon.safeproject
+ 
++import android.content.Intent
+ import androidx.appcompat.app.AppCompatActivity
+ import android.os.Bundle
++import android.os.Handler
++import com.seoyoon.safeproject.databinding.ActivityMypageBinding
+ 
+-class MyPageActivity : AppCompatActivity() {
++class MypageActivity : AppCompatActivity() {
++    lateinit var binding: ActivityMypageBinding
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+-        setContentView(R.layout.activity_my_page)
++        binding = ActivityMypageBinding.inflate(layoutInflater)
++        setContentView(binding.root)
++
++
+     }
+ }
+\ No newline at end of file

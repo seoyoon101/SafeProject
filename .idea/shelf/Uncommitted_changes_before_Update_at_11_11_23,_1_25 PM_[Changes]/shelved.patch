@@ -1,0 +1,98 @@
+Index: app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.seoyoon.safeproject\n\nimport androidx.appcompat.app.AppCompatActivity\nimport android.os.Bundle\n\nclass MyPageActivity : AppCompatActivity() {\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_my_page)\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt b/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt
+--- a/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt	(revision a89db9e18a06760e80f677eb631d9a7517a0215e)
++++ b/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt	(date 1699673439049)
+@@ -1,11 +1,24 @@
+ package com.seoyoon.safeproject
+ 
++import android.content.Intent
+ import androidx.appcompat.app.AppCompatActivity
+ import android.os.Bundle
++import android.os.Handler
++import com.seoyoon.safeproject.databinding.ActivityMypageBinding
+ 
+-class MyPageActivity : AppCompatActivity() {
++class MypageActivity : AppCompatActivity() {
++    lateinit var binding: ActivityMypageBinding
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+-        setContentView(R.layout.activity_my_page)
++        binding = ActivityMypageBinding.inflate(layoutInflater)
++        setContentView(binding.root)
++
++
++        val intent = Intent(this, LoginActivity::class.java)
++        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
++        startActivity(intent)
++        finish()
++
++
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/seoyoon/safeproject/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.seoyoon.safeproject\n\nimport android.location.Location\nimport androidx.appcompat.app.AppCompatActivity\nimport android.os.Bundle\nimport androidx.fragment.app.FragmentActivity\nimport com.naver.maps.geometry.LatLng\nimport com.naver.maps.map.CameraPosition\nimport com.naver.maps.map.NaverMap\nimport com.naver.maps.map.NaverMapOptions\nimport com.naver.maps.map.OnMapReadyCallback\nimport com.naver.maps.map.overlay.Marker\nimport com.seoyoon.safeproject.databinding.ActivityMainBinding\n\nclass MainActivity : FragmentActivity(), OnMapReadyCallback {\n\n    lateinit var binding: ActivityMainBinding\n    private var myLocation: LatLng? = LatLng(37.5667, 126.9783)\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        binding = ActivityMainBinding.inflate(layoutInflater)\n        setContentView(binding.root)\n        binding.mapFragment\n    }\n\n    override fun onMapReady(naverMap: NaverMap) {\n        val options = NaverMapOptions()\n            .camera(CameraPosition(LatLng(35.1798159, 129.0750222), 8.0))\n            .mapType(NaverMap.MapType.Terrain)\n\n        val marker = Marker()\n        marker.position = LatLng(35.1798159, 129.0750222)\n        marker.map = naverMap\n\n        val myMarker = Marker()\n        myMarker.position = myLocation!!\n    }\n\n    fun getMyLocation(location: Location) {\n        myLocation = LatLng(location.latitude, location.longitude)\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/seoyoon/safeproject/MainActivity.kt b/app/src/main/java/com/seoyoon/safeproject/MainActivity.kt
+--- a/app/src/main/java/com/seoyoon/safeproject/MainActivity.kt	(revision a89db9e18a06760e80f677eb631d9a7517a0215e)
++++ b/app/src/main/java/com/seoyoon/safeproject/MainActivity.kt	(date 1699676652691)
+@@ -1,15 +1,14 @@
+ package com.seoyoon.safeproject
+ 
+ import android.location.Location
+-import androidx.appcompat.app.AppCompatActivity
+ import android.os.Bundle
+ import androidx.fragment.app.FragmentActivity
+ import com.naver.maps.geometry.LatLng
+-import com.naver.maps.map.CameraPosition
++import com.naver.maps.map.MapFragment
+ import com.naver.maps.map.NaverMap
+-import com.naver.maps.map.NaverMapOptions
+ import com.naver.maps.map.OnMapReadyCallback
+ import com.naver.maps.map.overlay.Marker
++import com.naver.maps.map.util.MarkerIcons
+ import com.seoyoon.safeproject.databinding.ActivityMainBinding
+ 
+ class MainActivity : FragmentActivity(), OnMapReadyCallback {
+@@ -21,20 +20,24 @@
+         super.onCreate(savedInstanceState)
+         binding = ActivityMainBinding.inflate(layoutInflater)
+         setContentView(binding.root)
+-        binding.mapFragment
++
++        val fm = supportFragmentManager
++        val mapFragment = fm.findFragmentById(R.id.map_fragment) as MapFragment?
++            ?: MapFragment.newInstance().also {
++                fm.beginTransaction().add(R.id.map_fragment, it).commit()
++            }
++
++        mapFragment.getMapAsync(this)
++
+     }
+ 
+     override fun onMapReady(naverMap: NaverMap) {
+-        val options = NaverMapOptions()
+-            .camera(CameraPosition(LatLng(35.1798159, 129.0750222), 8.0))
+-            .mapType(NaverMap.MapType.Terrain)
+ 
+         val marker = Marker()
+-        marker.position = LatLng(35.1798159, 129.0750222)
++        marker.position = LatLng(37.5670135, 126.9783740)
++        marker.icon = MarkerIcons.RED
+         marker.map = naverMap
+ 
+-        val myMarker = Marker()
+-        myMarker.position = myLocation!!
+     }
+ 
+     fun getMyLocation(location: Location) {

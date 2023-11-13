@@ -20,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val DURATION: Long = 3000
+        const val DURATION: Long = 3000
     }
 
 }
