@@ -129,7 +129,7 @@
         app:layout_constraintVertical_bias="0.448" />
 
     <Button
-        android:id="@+id/Adit_Account_button"
+        android:id="@+id/adit_account_button"
         android:layout_width="82dp"
         android:layout_height="38dp"
         android:text="수정"

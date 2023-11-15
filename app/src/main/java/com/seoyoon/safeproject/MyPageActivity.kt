@@ -27,18 +27,47 @@ class MyPageActivity : AppCompatActivity() {
                 .document(user.email.toString())
                 .get()
                 .addOnSuccessListener {document ->
-                   binding.emailEditText2.hint = document.get("email").toString()
-                   binding.etName2.hint = document.get("name").toString()
-                   binding.emailEditText2.hint = document.get("gender").toString()
-                   binding.joinBirth2.hint = document.get("born").toString()
-                   binding.emailEditText2.hint = document.get("phoneNum").toString()
-                   binding.joinEmergencyTel5.hint = document.get("emergency1").toString()
-                   binding.emailEditText2.hint = document.get("emergency2").toString()
-                   binding.emailEditText2.hint = document.get("emergency3").toString()
+                   binding.emailEditText2.setText (document.get("email").toString())
+                   binding.etName2.setText(document.get("name").toString())
+
+                   if(document.get("gender").toString() == "남성"){
+                       binding.radioButton2.isChecked = true
+                       binding.radioButton.isChecked = false
+                   }
+                    else{
+                       binding.radioButton2.isChecked = false
+                       binding.radioButton.isChecked = true
+                   }
+                   binding.joinBirth2.setText(document.get("born").toString())
+                   binding.emailEditText2.setText(document.get("phoneNum").toString())
+                   binding.joinTel2.setText(document.get("emergency1").toString())
+                   binding.joinEmergencyTel5.setText(document.get("emergency1").toString())
+                   binding.joinEmergencyTel4.setText(document.get("emergency2").toString())
+                   binding.joinEmergencyTel.setText (document.get("emergency3").toString())
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, "실패", Toast.LENGTH_SHORT).show()
                 }
+
+            binding.aditAccountButton.setOnClickListener {
+                val user = hashMapOf(
+                    "email" to binding.emailEditText2,
+                    "name" to binding.etName2.text.toString(),
+                    "gender" to binding.gender ,
+                    "born" to binding.joinBirth2.text.toString(),
+                    "phoneNum" to binding.joinTel2.text.toString(),
+                    "emergency1" to binding.joinEmergencyTel5.text.toString(),
+                    "emergency2" to binding.joinEmergencyTel4.text.toString(),
+                    "emergency3" to binding.joinEmergencyTel.text.toString(),
+                )
+
+                db.collection("users")
+                    .document(email.toString())
+                    .set(user)
+                val intentToMain = Intent(this, MainActivity::class.java)
+                startActivity(intentToMain)
+                finish()
+            }
 
         } else {
             // No user is signed in
