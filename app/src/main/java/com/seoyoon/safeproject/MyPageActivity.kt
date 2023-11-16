@@ -1,5 +1,6 @@
 package com.seoyoon.safeproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -31,15 +32,14 @@ class MyPageActivity : AppCompatActivity() {
                    binding.etName2.setText(document.get("name").toString())
 
                    if(document.get("gender").toString() == "남성"){
-                       binding.radioButton2.isChecked = true
-                       binding.radioButton.isChecked = false
-                   }
-                    else{
                        binding.radioButton2.isChecked = false
                        binding.radioButton.isChecked = true
                    }
+                    else{
+                       binding.radioButton2.isChecked = true
+                       binding.radioButton.isChecked = false
+                   }
                    binding.joinBirth2.setText(document.get("born").toString())
-                   binding.emailEditText2.setText(document.get("phoneNum").toString())
                    binding.joinTel2.setText(document.get("emergency1").toString())
                    binding.joinEmergencyTel5.setText(document.get("emergency1").toString())
                    binding.joinEmergencyTel4.setText(document.get("emergency2").toString())
@@ -50,10 +50,19 @@ class MyPageActivity : AppCompatActivity() {
                 }
 
             binding.aditAccountButton.setOnClickListener {
+
+                var gender = ""
+                binding.rdGroup.setOnCheckedChangeListener { radioGroup, id ->
+                    when (id) {
+                        binding.radioButton.id -> gender = "여성"
+                        binding.radioButton2.id -> gender = "남성"
+                    }
+                }
+
                 val user = hashMapOf(
-                    "email" to binding.emailEditText2,
+                    "email" to binding.emailEditText2.toString(),
                     "name" to binding.etName2.text.toString(),
-                    "gender" to binding.gender ,
+                    "gender" to gender,
                     "born" to binding.joinBirth2.text.toString(),
                     "phoneNum" to binding.joinTel2.text.toString(),
                     "emergency1" to binding.joinEmergencyTel5.text.toString(),
@@ -61,9 +70,21 @@ class MyPageActivity : AppCompatActivity() {
                     "emergency3" to binding.joinEmergencyTel.text.toString(),
                 )
 
-                db.collection("users")
-                    .document(email.toString())
-                    .set(user)
+                val washingtonRef = db.collection("users").document(binding.emailEditText2.toString())
+
+                washingtonRef
+                    .update(
+                        mapOf(
+                            "email" to binding.emailEditText2.toString(),
+                            "name" to binding.etName2.text.toString(),
+                            "gender" to gender,
+                            "born" to binding.joinBirth2.text.toString(),
+                            "phoneNum" to binding.joinTel2.text.toString(),
+                            "emergency1" to binding.joinEmergencyTel5.text.toString(),
+                            "emergency2" to binding.joinEmergencyTel4.text.toString(),
+                            "emergency3" to binding.joinEmergencyTel.text.toString(),)
+                    )
+
                 val intentToMain = Intent(this, MainActivity::class.java)
                 startActivity(intentToMain)
                 finish()
