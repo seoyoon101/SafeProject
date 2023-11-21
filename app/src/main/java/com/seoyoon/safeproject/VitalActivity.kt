@@ -26,13 +26,13 @@ class VitalActivity : AppCompatActivity() {
     private fun updateHeartRate() {
         handler.postDelayed({
             // 모의 심박수 데이터 생성 (실제로는 센서 또는 외부 기기에서 가져와야 함)
-            val heartRate = Random.nextInt(60, 70)
+            val heartRate = Random.nextInt(70, 80)
 
             // TextView에 심박수 표시
             heartRateTextView.text = "심박수: $heartRate bpm"
 
             // 다음 업데이트 예약
             updateHeartRate()
-        }, 3000) // 1초마다 업데이트
+        }, 3000) // 3초마다 업데이트
     }
 }

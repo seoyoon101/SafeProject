@@ -1,5 +1,6 @@
 package com.seoyoon.safeproject
 
+import EmergencyActivity
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -53,11 +54,18 @@ class MainActivity : FragmentActivity(), OnMapReadyCallback {
             startActivity(intent)
         }
 
-      /*  binding.settingButton.setOnClickListener {
+        binding.emergencyButton.setOnClickListener {
+            val intent = Intent(this, EmergencyActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+        }
+
+
+       binding.settingButton.setOnClickListener {
             val intent = Intent(this,SettingActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
-        }*/
+        }
 
     }
 

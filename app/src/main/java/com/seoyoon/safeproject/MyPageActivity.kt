@@ -17,6 +17,18 @@ class MyPageActivity : AppCompatActivity() {
         binding = ActivityMypageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.LogoutButton.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+        }
+
+        binding.DeleteAccountButton.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+        }
+
         val db = Firebase.firestore
         var resultString = ""
 

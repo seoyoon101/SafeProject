@@ -1,0 +1,374 @@
+Index: app/src/main/java/com/seoyoon/safeproject/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.seoyoon.safeproject\r\n\r\nimport android.Manifest\r\nimport android.content.Intent\r\nimport android.content.pm.PackageManager\r\nimport android.os.Bundle\r\nimport androidx.core.app.ActivityCompat\r\nimport androidx.core.content.ContextCompat\r\nimport androidx.fragment.app.FragmentActivity\r\nimport com.naver.maps.map.LocationTrackingMode\r\nimport com.naver.maps.map.MapFragment\r\nimport com.naver.maps.map.NaverMap\r\nimport com.naver.maps.map.OnMapReadyCallback\r\nimport com.naver.maps.map.util.FusedLocationSource\r\nimport com.seoyoon.safeproject.databinding.ActivityMainBinding\r\n\r\nclass MainActivity : FragmentActivity(), OnMapReadyCallback {\r\n\r\n    lateinit var binding: ActivityMainBinding\r\n    private val LOCATION_PERMISSION_REQUEST_CODE = 5000\r\n\r\n    private val PERMISSIONS = arrayOf(\r\n        Manifest.permission.ACCESS_FINE_LOCATION,\r\n        Manifest.permission.ACCESS_COARSE_LOCATION\r\n    )\r\n\r\n    private lateinit var naverMap: NaverMap\r\n    private lateinit var locationSource: FusedLocationSource\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        binding = ActivityMainBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        if (!hasPermission()) {\r\n            ActivityCompat.requestPermissions(this, PERMISSIONS, LOCATION_PERMISSION_REQUEST_CODE)\r\n        } else {\r\n            initMapView()\r\n        }\r\n\r\n        binding.userButton.setOnClickListener {\r\n            val intent = Intent(this, MyPageActivity::class.java)\r\n            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)\r\n            startActivity(intent)\r\n        }\r\n\r\n        binding.settingButton.setOnClickListener {\r\n            val intent = Intent(this, SettingActivity::class.java)\r\n            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)\r\n            startActivity(intent)\r\n        }\r\n    }\r\n\r\n    // hasPermission()에서는 위치 권한이 있을 경우 true를, 없을 경우 false를 반환한다.\r\n    private fun hasPermission(): Boolean {\r\n        for (permission in PERMISSIONS) {\r\n            if (ContextCompat.checkSelfPermission(this, permission)\r\n                != PackageManager.PERMISSION_GRANTED\r\n            ) {\r\n                return false\r\n            }\r\n        }\r\n        return true\r\n    }\r\n\r\n    private fun initMapView() {\r\n        val fm = supportFragmentManager\r\n        val mapFragment = fm.findFragmentById(R.id.map_fragment) as MapFragment?\r\n            ?: MapFragment.newInstance().also {\r\n                fm.beginTransaction().add(R.id.map_fragment, it).commit()\r\n            }\r\n\r\n        // fragment의 getMapAsync() 메서드로 OnMapReadyCallback 콜백을 등록하면 비동기로 NaverMap 객체를 얻을 수 있다.\r\n        mapFragment.getMapAsync(this)\r\n        locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)\r\n    }\r\n\r\n    override fun onMapReady(naverMap: NaverMap) {\r\n        this.naverMap = naverMap\r\n        // 현재 위치\r\n        naverMap.locationSource = locationSource\r\n        // 현재 위치 버튼 기능\r\n        naverMap.uiSettings.isLocationButtonEnabled = true\r\n        // 위치를 추적하면서 카메라도 따라 움직인다.\r\n        naverMap.locationTrackingMode = LocationTrackingMode.Follow\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/seoyoon/safeproject/MainActivity.kt b/app/src/main/java/com/seoyoon/safeproject/MainActivity.kt
+--- a/app/src/main/java/com/seoyoon/safeproject/MainActivity.kt	(revision 70cb78c8d6ba982eef3ec745aed64ea88bc4c6ca)
++++ b/app/src/main/java/com/seoyoon/safeproject/MainActivity.kt	(date 1700474501484)
+@@ -43,12 +43,12 @@
+             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+             startActivity(intent)
+         }
+-
++/*
+         binding.settingButton.setOnClickListener {
+             val intent = Intent(this, SettingActivity::class.java)
+             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+             startActivity(intent)
+-        }
++        }*/
+     }
+ 
+     // hasPermission()에서는 위치 권한이 있을 경우 true를, 없을 경우 false를 반환한다.
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_11_11_23__1_25PM__Changes_1.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_11_11_23__1_25PM__Changes_1.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_11_11_23__1_25PM__Changes_1.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_11_11_23__1_25PM__Changes_1.xml	(revision 70cb78c8d6ba982eef3ec745aed64ea88bc4c6ca)
++++ /dev/null	(revision 70cb78c8d6ba982eef3ec745aed64ea88bc4c6ca)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_11_11_23,_1_25 PM_[Changes]1" date="1699676733910" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_11_23,_1_25 PM_[Changes]1/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 11/11/23, 1:25 PM [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11_오후_12_30_[Changes]1/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11_오후_12_30_[Changes]1/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11_오후_12_30_[Changes]1/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11_오후_12_30_[Changes]1/shelved.patch	(revision 70cb78c8d6ba982eef3ec745aed64ea88bc4c6ca)
++++ /dev/null	(revision 70cb78c8d6ba982eef3ec745aed64ea88bc4c6ca)
+@@ -1,245 +0,0 @@
+-Index: app/src/main/res/layout/activity_my_page.xml
+-===================================================================
+-diff --git a/app/src/main/res/layout/activity_my_page.xml b/app/src/main/res/layout/activity_my_page.xml
+-deleted file mode 100644
+---- a/app/src/main/res/layout/activity_my_page.xml	
+-+++ /dev/null	
+-@@ -1,237 +0,0 @@
+--<?xml version="1.0" encoding="utf-8"?>
+--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+--    xmlns:app="http://schemas.android.com/apk/res-auto"
+--    xmlns:tools="http://schemas.android.com/tools"
+--    android:layout_width="match_parent"
+--    android:layout_height="match_parent"
+--    tools:context=".MyPageActivity">
+--
+--    <EditText
+--        android:id="@+id/password_edit_text3"
+--        android:layout_width="wrap_content"
+--        android:layout_height="wrap_content"
+--        android:ems="10"
+--        android:inputType="textPassword"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintHorizontal_bias="0.805"
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent"
+--        app:layout_constraintVertical_bias="0.561" />
+--
+--    <EditText
+--        android:id="@+id/email_edit_text3"
+--        android:layout_width="wrap_content"
+--        android:layout_height="wrap_content"
+--        android:ems="10"
+--        android:inputType="text"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintHorizontal_bias="0.805"
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent"
+--        app:layout_constraintVertical_bias="0.494" />
+--
+--    <TextView
+--        android:id="@+id/join_member_id3"
+--        android:layout_width="99dp"
+--        android:layout_height="27dp"
+--        android:text="*이메일"
+--        android:textAlignment="viewEnd"
+--        android:textColor="#000000"
+--        android:textSize="16sp"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintHorizontal_bias="0.121"
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent"
+--        app:layout_constraintVertical_bias="0.49" />
+--
+--    <TextView
+--        android:id="@+id/join_Password3"
+--        android:layout_width="99dp"
+--        android:layout_height="27dp"
+--        android:text="*비밀번호"
+--        android:textAlignment="textEnd"
+--        android:textColor="#000000"
+--        android:textSize="16sp"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintHorizontal_bias="0.121"
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent"
+--        app:layout_constraintVertical_bias="0.546" />
+--
+--    <TextView
+--        android:id="@+id/textView4"
+--        android:layout_width="112dp"
+--        android:layout_height="0dp"
+--        android:layout_marginTop="89dp"
+--        android:layout_marginBottom="137dp"
+--        android:text="내 정보"
+--        android:textSize="34sp"
+--        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+--        app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent" />
+--
+--    <EditText
+--        android:id="@+id/et_name2"
+--        android:layout_width="wrap_content"
+--        android:layout_height="wrap_content"
+--        android:ems="10"
+--        android:inputType="text"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintHorizontal_bias="0.81"
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent"
+--        app:layout_constraintVertical_bias="0.346" />
+--
+--    <TextView
+--        android:id="@+id/birth"
+--        android:layout_width="118dp"
+--        android:layout_height="27dp"
+--        android:text="*생년월일"
+--        android:textAlignment="textEnd"
+--        android:textColor="#000000"
+--        android:textSize="16sp"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintHorizontal_bias="0.071"
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent"
+--        app:layout_constraintVertical_bias="0.448" />
+--
+--    <TextView
+--        android:id="@+id/join_member_name"
+--        android:layout_width="118dp"
+--        android:layout_height="27dp"
+--        android:text="*이름"
+--        android:textAlignment="textEnd"
+--        android:textColor="#000000"
+--        android:textSize="16sp"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintHorizontal_bias="0.071"
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent"
+--        app:layout_constraintVertical_bias="0.35" />
+--
+--    <Button
+--        android:id="@+id/signup_button"
+--        android:layout_width="82dp"
+--        android:layout_height="38dp"
+--        android:text="수정"
+--        android:textSize="14sp"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintHorizontal_bias="0.884"
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent"
+--        app:layout_constraintVertical_bias="0.852" />
+--
+--    <Button
+--        android:id="@+id/signup_button3"
+--        android:layout_width="82dp"
+--        android:layout_height="37dp"
+--        android:text="회원탈퇴"
+--        android:textSize="14sp"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintHorizontal_bias="0.052"
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent"
+--        app:layout_constraintVertical_bias="0.947" />
+--
+--    <TextView
+--        android:id="@+id/join_gender"
+--        android:layout_width="118dp"
+--        android:layout_height="27dp"
+--        android:text="*성별"
+--        android:textAlignment="textEnd"
+--        android:textColor="#000000"
+--        android:textSize="16sp"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintHorizontal_bias="0.071"
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent"
+--        app:layout_constraintVertical_bias="0.401" />
+--
+--    <EditText
+--        android:id="@+id/join_tel2"
+--        android:layout_width="wrap_content"
+--        android:layout_height="wrap_content"
+--        android:ems="10"
+--        android:inputType="phone"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintHorizontal_bias="0.81"
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent"
+--        app:layout_constraintVertical_bias="0.606" />
+--
+--    <EditText
+--        android:id="@+id/join_birth2"
+--        android:layout_width="wrap_content"
+--        android:layout_height="wrap_content"
+--        android:ems="10"
+--        android:inputType="date"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintHorizontal_bias="0.81"
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent"
+--        app:layout_constraintVertical_bias="0.45" />
+--
+--    <TextView
+--        android:id="@+id/tel"
+--        android:layout_width="118dp"
+--        android:layout_height="27dp"
+--        android:text="*전화번호"
+--        android:textAlignment="textEnd"
+--        android:textColor="#000000"
+--        android:textSize="16sp"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintHorizontal_bias="0.061"
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent"
+--        app:layout_constraintVertical_bias="0.603" />
+--
+--    <androidx.constraintlayout.widget.Guideline
+--        android:id="@+id/guideline"
+--        android:layout_width="wrap_content"
+--        android:layout_height="wrap_content"
+--        android:orientation="horizontal"
+--        app:layout_constraintGuide_begin="-34dp" />
+--
+--    <RadioGroup
+--        android:id="@+id/radioGroup"
+--        android:layout_width="206dp"
+--        android:layout_height="0dp"
+--        android:layout_marginEnd="42dp"
+--        android:layout_marginBottom="422dp"
+--        android:orientation="horizontal"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintTop_toBottomOf="@+id/textView4">
+--
+--        <RadioButton
+--            android:id="@+id/radioButton"
+--            android:layout_width="wrap_content"
+--            android:layout_height="wrap_content"
+--            android:layout_weight="1"
+--            android:text="여성" />
+--
+--        <RadioButton
+--            android:id="@+id/radioButton2"
+--            android:layout_width="wrap_content"
+--            android:layout_height="wrap_content"
+--            android:layout_weight="1"
+--            android:text="남성" />
+--
+--    </RadioGroup>
+--
+--</androidx.constraintlayout.widget.ConstraintLayout>
+-\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_23__1_49PM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_23__1_49PM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_23__1_49PM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_23__1_49PM__Changes_.xml	(revision 70cb78c8d6ba982eef3ec745aed64ea88bc4c6ca)
++++ /dev/null	(revision 70cb78c8d6ba982eef3ec745aed64ea88bc4c6ca)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Checkout_at_11_11_23,_1_49 PM_[Changes]" date="1699678196933" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_23,_1_49 PM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 11/11/23, 1:49 PM [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11__12_30__Changes_1.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11__12_30__Changes_1.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11__12_30__Changes_1.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11__12_30__Changes_1.xml	(revision 70cb78c8d6ba982eef3ec745aed64ea88bc4c6ca)
++++ /dev/null	(revision 70cb78c8d6ba982eef3ec745aed64ea88bc4c6ca)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2023-11-11_오후_12_30_[Changes]1" date="1699673468508" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11_오후_12_30_[Changes]1/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2023-11-11 오후 12:30 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_23,_1_49 PM_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_23,_1_49 PM_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_23,_1_49 PM_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_23,_1_49 PM_[Changes]/shelved.patch	(revision 70cb78c8d6ba982eef3ec745aed64ea88bc4c6ca)
++++ /dev/null	(revision 70cb78c8d6ba982eef3ec745aed64ea88bc4c6ca)
+@@ -1,19 +0,0 @@
+-Index: app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.seoyoon.safeproject\n\nimport androidx.appcompat.app.AppCompatActivity\nimport android.os.Bundle\n\nclass MyPageActivity : AppCompatActivity() {\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_my_page)\n    }\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt b/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt
+---- a/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt	(revision bf44518dd962d4efc9966dceb8b06edf679b98ac)
+-+++ b/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt	(date 1699678179820)
+-@@ -6,6 +6,6 @@
+- class MyPageActivity : AppCompatActivity() {
+-     override fun onCreate(savedInstanceState: Bundle?) {
+-         super.onCreate(savedInstanceState)
+--        setContentView(R.layout.activity_my_page)
+-+        setContentView(R.layout.activity_mypage)
+-     }
+- }
+-\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11__1_34__Changes_1.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11__1_34__Changes_1.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11__1_34__Changes_1.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11__1_34__Changes_1.xml	(revision 70cb78c8d6ba982eef3ec745aed64ea88bc4c6ca)
++++ /dev/null	(revision 70cb78c8d6ba982eef3ec745aed64ea88bc4c6ca)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2023-11-11_오후_1_34_[Changes]1" date="1699677290300" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11_오후_1_34_[Changes]1/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2023-11-11 오후 1:34 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: app/src/main/java/com/seoyoon/safeproject/SplashActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.seoyoon.safeproject\r\n\r\nimport android.content.Intent\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport android.os.Bundle\r\nimport android.os.Handler\r\n\r\n\r\nclass SplashActivity : AppCompatActivity() {\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_splash)\r\n\r\n        Handler().postDelayed({\r\n            val intent = Intent(this, LoginActivity::class.java)\r\n            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)\r\n            startActivity(intent)\r\n            finish()\r\n        }, DURATION)\r\n    }\r\n\r\n    companion object {\r\n        const val DURATION: Long = 3000\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/seoyoon/safeproject/SplashActivity.kt b/app/src/main/java/com/seoyoon/safeproject/SplashActivity.kt
+--- a/app/src/main/java/com/seoyoon/safeproject/SplashActivity.kt	(revision 70cb78c8d6ba982eef3ec745aed64ea88bc4c6ca)
++++ b/app/src/main/java/com/seoyoon/safeproject/SplashActivity.kt	(date 1700474545208)
+@@ -12,7 +12,7 @@
+         setContentView(R.layout.activity_splash)
+ 
+         Handler().postDelayed({
+-            val intent = Intent(this, LoginActivity::class.java)
++            val intent = Intent(this, MainActivity::class.java)
+             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+             startActivity(intent)
+             finish()
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_11_11_23,_1_25 PM_[Changes]1/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_11_11_23,_1_25 PM_[Changes]1/shelved.patch
+deleted file mode 100644
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11_오후_1_34_[Changes]1/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_2023-11-11_오후_1_34_[Changes]1/shelved.patch
+deleted file mode 100644

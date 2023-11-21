@@ -1,0 +1,109 @@
+Index: app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.seoyoon.safeproject\r\n\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.widget.Toast\r\nimport com.google.firebase.auth.ktx.auth\r\nimport com.google.firebase.firestore.ktx.firestore\r\nimport com.google.firebase.ktx.Firebase\r\nimport com.seoyoon.safeproject.databinding.ActivityMypageBinding\r\n\r\nclass MyPageActivity : AppCompatActivity() {\r\n    lateinit var binding: ActivityMypageBinding\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        binding = ActivityMypageBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        val db = Firebase.firestore\r\n        var resultString = \"\"\r\n\r\n        val user = Firebase.auth.currentUser\r\n        if (user != null) {\r\n            // User is signed in\r\n\r\n            val userInfo = db.collection(\"users\")\r\n                .document(user.email.toString())\r\n                .get()\r\n                .addOnSuccessListener {document ->\r\n                   binding.emailEditText2.setText (document.get(\"email\").toString())\r\n                   binding.etName2.setText(document.get(\"name\").toString())\r\n\r\n                   if(document.get(\"gender\").toString() == \"남성\"){\r\n                       binding.radioButton2.isChecked = true\r\n                       binding.radioButton.isChecked = false\r\n                   }\r\n                    else{\r\n                       binding.radioButton2.isChecked = false\r\n                       binding.radioButton.isChecked = true\r\n                   }\r\n                   binding.joinBirth2.setText(document.get(\"born\").toString())\r\n                   binding.emailEditText2.setText(document.get(\"phoneNum\").toString())\r\n                   binding.joinTel2.setText(document.get(\"emergency1\").toString())\r\n                   binding.joinEmergencyTel5.setText(document.get(\"emergency1\").toString())\r\n                   binding.joinEmergencyTel4.setText(document.get(\"emergency2\").toString())\r\n                   binding.joinEmergencyTel.setText (document.get(\"emergency3\").toString())\r\n                }\r\n                .addOnFailureListener {\r\n                    Toast.makeText(this, \"실패\", Toast.LENGTH_SHORT).show()\r\n                }\r\n\r\n            binding.aditAccountButton.setOnClickListener {\r\n                val user = hashMapOf(\r\n                    \"email\" to binding.emailEditText2,\r\n                    \"name\" to binding.etName2.text.toString(),\r\n                    \"gender\" to binding.gender ,\r\n                    \"born\" to binding.joinBirth2.text.toString(),\r\n                    \"phoneNum\" to binding.joinTel2.text.toString(),\r\n                    \"emergency1\" to binding.joinEmergencyTel5.text.toString(),\r\n                    \"emergency2\" to binding.joinEmergencyTel4.text.toString(),\r\n                    \"emergency3\" to binding.joinEmergencyTel.text.toString(),\r\n                )\r\n\r\n                db.collection(\"users\")\r\n                    .document(email.toString())\r\n                    .set(user)\r\n                val intentToMain = Intent(this, MainActivity::class.java)\r\n                startActivity(intentToMain)\r\n                finish()\r\n            }\r\n\r\n        } else {\r\n            // No user is signed in\r\n\r\n        }\r\n\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt b/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt
+--- a/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt	
++++ b/app/src/main/java/com/seoyoon/safeproject/MyPageActivity.kt	
+@@ -39,8 +39,7 @@
+                        binding.radioButton.isChecked = true
+                    }
+                    binding.joinBirth2.setText(document.get("born").toString())
+-                   binding.emailEditText2.setText(document.get("phoneNum").toString())
+-                   binding.joinTel2.setText(document.get("emergency1").toString())
++                   binding.joinTel2.setText(document.get("phoneNum").toString())
+                    binding.joinEmergencyTel5.setText(document.get("emergency1").toString())
+                    binding.joinEmergencyTel4.setText(document.get("emergency2").toString())
+                    binding.joinEmergencyTel.setText (document.get("emergency3").toString())
+@@ -49,7 +48,7 @@
+                     Toast.makeText(this, "실패", Toast.LENGTH_SHORT).show()
+                 }
+ 
+-            binding.aditAccountButton.setOnClickListener {
++/*            binding.aditAccountButton.setOnClickListener {
+                 val user = hashMapOf(
+                     "email" to binding.emailEditText2,
+                     "name" to binding.etName2.text.toString(),
+@@ -67,7 +66,7 @@
+                 val intentToMain = Intent(this, MainActivity::class.java)
+                 startActivity(intentToMain)
+                 finish()
+-            }
++            }*/
+ 
+         } else {
+             // No user is signed in
+Index: app/src/main/java/com/seoyoon/safeproject/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.seoyoon.safeproject\r\n\r\nimport android.content.Intent\r\nimport android.location.Location\r\nimport android.os.Bundle\r\nimport androidx.fragment.app.FragmentActivity\r\nimport com.naver.maps.geometry.LatLng\r\nimport com.naver.maps.map.CameraPosition\r\nimport com.naver.maps.map.MapFragment\r\nimport com.naver.maps.map.NaverMap\r\nimport com.naver.maps.map.NaverMapOptions\r\nimport com.naver.maps.map.OnMapReadyCallback\r\nimport com.naver.maps.map.overlay.Marker\r\nimport com.naver.maps.map.util.MarkerIcons\r\nimport com.seoyoon.safeproject.databinding.ActivityMainBinding\r\n\r\nclass MainActivity : FragmentActivity(), OnMapReadyCallback {\r\n\r\n    lateinit var binding: ActivityMainBinding\r\n    private var myLocation: LatLng? = LatLng(37.5667, 126.9783)\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        binding = ActivityMainBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        val fm = supportFragmentManager\r\n        val mapFragment = fm.findFragmentById(R.id.map_fragment) as MapFragment?\r\n            ?: MapFragment.newInstance().also {\r\n                fm.beginTransaction().add(R.id.map_fragment, it).commit()\r\n            }\r\n        mapFragment.getMapAsync(this)\r\n\r\n        binding.userButton.setOnClickListener {\r\n            val intent = Intent(this, MyPageActivity::class.java)\r\n            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)\r\n            startActivity(intent)\r\n        }\r\n\r\n        binding.settingButton.setOnClickListener {\r\n            val intent = Intent(this, SettingActivity::class.java)\r\n            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)\r\n            startActivity(intent)\r\n        }\r\n    }\r\n\r\n    override fun onMapReady(naverMap: NaverMap) {\r\n        val options = NaverMapOptions()\r\n            .camera(CameraPosition(LatLng(37.5670135, 126.9783740), 8.0))\r\n            .mapType(NaverMap.MapType.Terrain)\r\n\r\n        val marker = Marker()\r\n        marker.position = LatLng(37.5670135, 126.9783740)\r\n        marker.icon = MarkerIcons.RED\r\n        marker.map = naverMap\r\n\r\n        val myMarker = Marker()\r\n        myMarker.position = myLocation!!\r\n    }\r\n\r\n    fun getMyLocation(location: Location) {\r\n        myLocation = LatLng(location.latitude, location.longitude)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/seoyoon/safeproject/MainActivity.kt b/app/src/main/java/com/seoyoon/safeproject/MainActivity.kt
+--- a/app/src/main/java/com/seoyoon/safeproject/MainActivity.kt	
++++ b/app/src/main/java/com/seoyoon/safeproject/MainActivity.kt	
+@@ -1,9 +1,14 @@
+ package com.seoyoon.safeproject
+ 
++import android.Manifest
+ import android.content.Intent
++import android.content.pm.PackageManager
+ import android.location.Location
+ import android.os.Bundle
++import androidx.core.app.ActivityCompat
+ import androidx.fragment.app.FragmentActivity
++import com.google.android.gms.location.FusedLocationProviderClient
++import com.google.android.gms.location.LocationServices
+ import com.naver.maps.geometry.LatLng
+ import com.naver.maps.map.CameraPosition
+ import com.naver.maps.map.MapFragment
+@@ -18,12 +23,36 @@
+ 
+     lateinit var binding: ActivityMainBinding
+     private var myLocation: LatLng? = LatLng(37.5667, 126.9783)
+-
++    private lateinit var fusedLocationClient: FusedLocationProviderClient
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+         binding = ActivityMainBinding.inflate(layoutInflater)
+         setContentView(binding.root)
+ 
++        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
++        if (ActivityCompat.checkSelfPermission(
++                this,
++                Manifest.permission.ACCESS_FINE_LOCATION
++            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
++                this,
++                Manifest.permission.ACCESS_COARSE_LOCATION
++            ) != PackageManager.PERMISSION_GRANTED
++        ) {
++            // TODO: Consider calling
++            //    ActivityCompat#requestPermissions
++            // here to request the missing permissions, and then overriding
++            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
++            //                                          int[] grantResults)
++            // to handle the case where the user grants the permission. See the documentation
++            // for ActivityCompat#requestPermissions for more details.
++            return
++        }
++        fusedLocationClient.lastLocation
++            .addOnSuccessListener { location: Location? ->
++                // Got last known location. In some rare situations this can be null.
++            }
++
++
+         val fm = supportFragmentManager
+         val mapFragment = fm.findFragmentById(R.id.map_fragment) as MapFragment?
+             ?: MapFragment.newInstance().also {
+@@ -44,6 +73,7 @@
+         }
+     }
+ 
++
+     override fun onMapReady(naverMap: NaverMap) {
+         val options = NaverMapOptions()
+             .camera(CameraPosition(LatLng(37.5670135, 126.9783740), 8.0))
