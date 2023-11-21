@@ -27,13 +27,6 @@
         android:scaleType="fitEnd"
         android:src="@drawable/user" />
 
-    <ImageView
-        android:id="@+id/vital"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:src="@drawable/vital" />
-
     <ImageButton
         android:id="@+id/setting_button"
         android:layout_width="69dp"
@@ -42,5 +35,12 @@
         android:layout_weight="1"
         android:backgroundTint="#00FFFFFF"
         android:src="@drawable/setting" />
+
+    <ImageButton
+        android:id="@+id/vital_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFFFFF"
+        android:src="@drawable/vital" />
 
 </FrameLayout>

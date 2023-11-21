@@ -20,6 +20,9 @@
             android:name=".SettingActivity"
             android:exported="false" />
         <activity
+            android:name=".VitalActivity"
+            android:exported="false" />
+        <activity
             android:name=".MyPageActivity"
             android:exported="false" />
         <activity

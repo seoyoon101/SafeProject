@@ -7,9 +7,12 @@ import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraPosition
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
+import com.naver.maps.map.NaverMapOptions
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.util.FusedLocationSource
 import com.seoyoon.safeproject.databinding.ActivityMainBinding
@@ -44,11 +47,18 @@ class MainActivity : FragmentActivity(), OnMapReadyCallback {
             startActivity(intent)
         }
 
-        binding.settingButton.setOnClickListener {
-            val intent = Intent(this, SettingActivity::class.java)
+        binding.vitalButton.setOnClickListener {
+            val intent = Intent(this, VitalActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }
+
+      /*  binding.settingButton.setOnClickListener {
+            val intent = Intent(this,SettingActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+        }*/
+
     }
 
     // hasPermission()에서는 위치 권한이 있을 경우 true를, 없을 경우 false를 반환한다.
@@ -76,6 +86,7 @@ class MainActivity : FragmentActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(naverMap: NaverMap) {
+
         this.naverMap = naverMap
         // 현재 위치
         naverMap.locationSource = locationSource
